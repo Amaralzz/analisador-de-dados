@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+</head>
+
+<body>
+    <h1>Formulário de upload</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="{{ form.arquivo.id_for_label }}" class="file-label">
+            📁 Escolher arquivo CSV
+        </label>
+        {{ form.arquivo }}
+        <button type="submit">Enviar</button>
+    </form>
+    <a href="{% url 'receber_arquivo' %}">Voltar</a>
+    <h2>Prévia do dataset</h2>
+    <div>
+        {{ resultado|safe }}
+    </div>
+    <h2>Estatísticas</h2>
+    <div>
+        {{ descricao|safe }}
+    </div>
+    <h2>Valores ausentes</h2>
+    <div>
+        {{ nulos|safe }}
+    </div>
+    <h2>Distribuição</h2>
+    <img src="data:image/png;base64,{{ imagem }}">
+    <script>
+    document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+        const nome = e.target.files[0]?.name || 'Nenhum arquivo selecionado';
+        document.querySelector('.file-label').textContent = '📁 ' + nome;
+    });
+</script>
+</body>
+
+</html>
