@@ -20,14 +20,14 @@ Aplicação web em Django que recebe um arquivo CSV via upload e gera automatica
 ## Como rodar localmente
 
 ```bash
-git clone <url-do-repositorio>
-cd analisador
+git clone https://github.com/Amaralzz/analisador-de-dados.git
+cd analisador-de-dados
 
 python -m venv venv
 venv\Scripts\activate        # Windows
 # source venv/bin/activate   # Linux/Mac
 
-pip install django pandas matplotlib
+pip install -r requirements.txt
 
 python manage.py migrate
 python manage.py runserver
